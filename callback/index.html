@@ -1,0 +1,24 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="../icon.png"><link rel="stylesheet" href="../style.css"><title>Verbindung – MarcelWB Gym</title></head><body><main><header><img src="../icon.png" alt=""><a href="../">MarcelWB Gym</a></header>
+<h1>TikTok-Verbindung</h1>
+<div class="card" id="box"><p id="status">Lese Antwort von TikTok …</p></div>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), box=document.getElementById('box');
+  var code=q.get('code'), err=q.get('error'), desc=q.get('error_description');
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  if(code){
+    box.innerHTML='<p class="ok"><strong>✓ Freigabe erteilt.</strong></p>'+
+      '<p>Kopiere diesen Code und füge ihn in GitHub beim Workflow „TikTok verbinden“ ein. Er ist nur wenige Minuten gültig.</p>'+
+      '<span class="code" id="c">'+esc(code)+'</span><button id="b">Code kopieren</button>'+
+      '<p style="font-size:14px">Erteilte Rechte: <code>'+esc(q.get('scopes')||'–')+'</code></p>';
+    document.getElementById('b').onclick=function(){
+      navigator.clipboard.writeText(code).then(function(){document.getElementById('b').textContent='✓ Kopiert'});
+    };
+  } else if(err){
+    box.innerHTML='<p class="err"><strong>Fehler: '+esc(err)+'</strong></p><p>'+esc(desc||'')+'</p>';
+  } else {
+    box.innerHTML='<p>Diese Seite empfängt die Antwort nach dem TikTok-Login. Aktuell liegt keine Antwort vor.</p>';
+  }
+})();
+</script>
+<nav class="legal"><a href="../privacy.html">Datenschutzerklärung / Privacy Policy</a><a href="../terms.html">Nutzungsbedingungen / Terms of Service</a></nav></main></body></html>
